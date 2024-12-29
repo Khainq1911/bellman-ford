@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bellman-Ford Algorithm</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="p-10 max-w-4xl mx-auto bg-white rounded shadow-lg mt-10">
+      <!-- Number of Vertices -->
+      <div class="flex items-center mb-6">
+        <label for="vertex-count" class="mr-4 font-semibold"
+          >Number of Vertices:</label
+        >
+        <input
+          type="number"
+          id="vertex-count"
+          class="border border-gray-300 rounded px-3 py-1 w-32"
+          placeholder="Enter vertices"
+        />
+      </div>
+
+      <!-- Edge Input Section -->
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center">
+          <label for="src" class="mr-2 font-semibold">Src:</label>
+          <input
+            type="number"
+            id="src"
+            class="border border-gray-300 rounded px-3 py-1 w-20"
+            placeholder="0"
+          />
+        </div>
+        <div class="flex items-center">
+          <label for="dest" class="mr-2 font-semibold">Dest:</label>
+          <input
+            type="number"
+            id="dest"
+            class="border border-gray-300 rounded px-3 py-1 w-20"
+            placeholder="1"
+          />
+        </div>
+        <div class="flex items-center">
+          <label for="weight" class="mr-2 font-semibold">Weight:</label>
+          <input
+            type="number"
+            id="weight"
+            class="border border-gray-300 rounded px-3 py-1 w-20"
+            placeholder="5"
+          />
+        </div>
+        <button
+          id="add-edge"
+          class="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 transition"
+        >
+          Add
+        </button>
+      </div>
+
+      <!-- Edges Table -->
+      <table
+        class="w-full border-collapse border border-gray-300 text-center mb-6"
+      >
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2">Src</th>
+            <th class="border border-gray-300 px-4 py-2">Dest</th>
+            <th class="border border-gray-300 px-4 py-2">Weight</th>
+          </tr>
+        </thead>
+        <tbody id="edges-table">
+          <!-- Rows will be added dynamically -->
+        </tbody>
+      </table>
+
+      <!-- Submit Button -->
+      <button
+        id="submit-bellman-ford"
+        class="px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 transition"
+      >
+        Submit
+      </button>
+      <button
+        id="reset-bellman-ford"
+        class="px-4 py-2 bg-red-500 text-white rounded shadow hover:bg-red-600 transition"
+      >
+        Reset
+      </button>
+      <!-- Results Table -->
+      <table
+        id="results-table"
+        class="w-full border-collapse border border-gray-300 text-center mt-6 hidden"
+      >
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2">Vertex</th>
+            <th class="border border-gray-300 px-4 py-2">Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be added dynamically -->
+        </tbody>
+      </table>
+    </div>
+    <script src="/bellman_ford_ui/index.js"></script>
+  </body>
+</html>
