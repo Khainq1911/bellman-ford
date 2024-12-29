@@ -1,30 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const vertexCountInput = document.getElementById("vertex-count");
   const srcInput = document.getElementById("src");
   const destInput = document.getElementById("dest");
   const weightInput = document.getElementById("weight");
   const addEdgeButton = document.getElementById("add-edge");
   const edgesTable = document.getElementById("edges-table");
   const submitButton = document.getElementById("submit-bellman-ford");
+  const resetButton = document.getElementById("reset-bellman-ford");
   const resultsTable = document.getElementById("results-table");
-  const vertexCountInput = document.getElementById("vertex-count");
+  const algorithmSrcInput = document.getElementById("algorithm-src");
+  const chooseSrcButton = document.getElementById("choose-src");
 
-  document
-    .getElementById("reset-bellman-ford")
-    .addEventListener("click", () => {
-      vertexCountInput.value = "";
-      srcInput.value = "";
-      destInput.value = "";
-      weightInput.value = "";
-
-   
-      edgesTable.innerHTML = "";
-
-      resultsTable.classList.add("hidden");
-      resultsBody.innerHTML = "";
-    });
+  let selectedSource = 0;
   const graph = [];
 
- 
+  chooseSrcButton.addEventListener("click", () => {
+    const source = parseInt(algorithmSrcInput.value.trim());
+    const V = parseInt(vertexCountInput.value.trim());
+
+    if (isNaN(source) || source < 0 || source >= V) {
+      alert("Please provide a valid source vertex!");
+      return;
+    }
+
+    selectedSource = source;
+    alert(`Source vertex set to: ${selectedSource}`);
+  });
+
   addEdgeButton.addEventListener("click", () => {
     const src = parseInt(srcInput.value.trim());
     const dest = parseInt(destInput.value.trim());
@@ -62,8 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const dis = Array(V).fill(Infinity);
-    const src = 0;
-    dis[src] = 0;
+    dis[selectedSource] = 0;
 
     for (let i = 0; i < V - 1; i++) {
       for (const { src, dest, weight } of graph) {
@@ -92,5 +93,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     resultsTable.classList.remove("hidden");
+  });
+
+  resetButton.addEventListener("click", () => {
+    vertexCountInput.value = "";
+    srcInput.value = "";
+    destInput.value = "";
+    weightInput.value = "";
+    algorithmSrcInput.value = "";
+    selectedSource = 0;
+    edgesTable.innerHTML = "";
+    resultsTable.classList.add("hidden");
+    resultsTable.querySelector("tbody").innerHTML = "";
   });
 });
